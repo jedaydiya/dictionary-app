@@ -1,10 +1,14 @@
-import { SpeakerSimpleHigh } from "@phosphor-icons/react";
+import { SpeakerSimpleHigh, SpeakerSimpleX } from "@phosphor-icons/react";
 import { wordType } from "../types";
 import { useState } from "react";
 type Props = {
   data: wordType;
+  audio: HTMLAudioElement | null;
 };
-const Definition = ({ data }: Props) => {
+const Definition = ({ data, audio }: Props) => {
+  const sound = data.phonetics[0].audio;
+  const handleSound = new Audio(sound);
+
   return (
     <>
       <div className="mt-10">
@@ -13,9 +17,19 @@ const Definition = ({ data }: Props) => {
             {data.word}
           </h1>
 
-          <button>
-            <SpeakerSimpleHigh size={40} color="#A3B18A" weight="fill" />
-          </button>
+          {sound ? (
+            <>
+              <button
+                onClick={() => {
+                  handleSound.play();
+                }}
+              >
+                <SpeakerSimpleHigh size={40} color="#A3B18A" weight="fill" />
+              </button>
+            </>
+          ) : (
+            <SpeakerSimpleX size={40} color="#A3B18A" weight="fill" />
+          )}
         </div>
         <p className="text-xl font-serif text-gray-500 px-2 py-2">
           {data.phonetic}

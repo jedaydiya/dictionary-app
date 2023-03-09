@@ -6,7 +6,7 @@ import Definition from "./components/Definition";
 import useSearch from "./hooks/useSearch";
 
 function App() {
-  const { term, onInputChange, onSubmit, word } = useSearch();
+  const { term, onInputChange, onSubmit, word, audio } = useSearch();
   return (
     <>
       <div className="flex items-center justify-center">
@@ -18,7 +18,7 @@ function App() {
                 onInputChange={onInputChange}
                 onSubmit={onSubmit}
               />
-              <Definition data={word} />
+              <Definition data={word} audio={audio} />
             </>
           ) : (
             <Search
