@@ -1,8 +1,9 @@
 import { useState, ChangeEvent } from "react";
 import axios from "axios";
+import { wordType } from "../types";
 const useSearch = () => {
   const [term, setTerm] = useState<string>("");
-
+  const [word, setWord] = useState<wordType | null>(null);
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setTerm(value);
@@ -11,9 +12,10 @@ const useSearch = () => {
 
   const getSearchOptions = (term: string) => {
     axios
-      .get(`https://api.dictionaryapi.dev/api/v2/entries/en/hello`)
+      .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${term}`)
       .then((res) => {
         console.log(res.data);
+        setWord(res.data);
       });
   };
 
