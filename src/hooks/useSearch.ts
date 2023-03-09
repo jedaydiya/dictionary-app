@@ -7,15 +7,15 @@ const useSearch = () => {
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setTerm(value);
-    console.log(term);
+    // console.log(term);
   };
 
   const getSearchOptions = (term: string) => {
     axios
       .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${term}`)
       .then((res) => {
-        console.log(res.data);
-        setWord(res.data);
+        console.log(res.data[0]);
+        setWord(res.data[0]);
       });
   };
 
@@ -27,6 +27,7 @@ const useSearch = () => {
     term,
     onInputChange,
     onSubmit,
+    word,
   };
 };
 

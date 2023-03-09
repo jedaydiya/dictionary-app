@@ -1,28 +1,39 @@
 import { SpeakerSimpleHigh } from "@phosphor-icons/react";
-
-const Definition = () => {
+import { wordType } from "../types";
+import { useState } from "react";
+type Props = {
+  data: wordType;
+};
+const Definition = ({ data }: Props) => {
   return (
     <>
       <div className="mt-10">
         <div className="flex justify-between">
-          <h1 className="text-4xl font-serif font-bold px-2 py-2">Sample</h1>
+          <h1 className="text-4xl font-serif font-bold px-2 py-2">
+            {data.word}
+          </h1>
 
-          <SpeakerSimpleHigh size={40} color="#A3B18A" weight="fill" />
+          <button>
+            <SpeakerSimpleHigh size={40} color="#A3B18A" weight="fill" />
+          </button>
         </div>
+        <p className="text-xl font-serif text-gray-500 px-2 py-2">
+          {data.phonetic}
+        </p>
+        {data.meanings.map((item, i) => (
+          <div key={i}>
+            <p className="text-xl font-serif text-gray-500 px-2 py-2">
+              {item.partOfSpeech}
+            </p>
+            {item.definitions.map((item, i) => (
+              <div className="border-l-8 border-[#A3B18A]" key={i}>
+                <p className="text-lg px-2 py-2">{item.definition}</p>
 
-        <p className="tex-2xl font-serif mt-1 text-gray-500 px-2 py-2">
-          pos /sample /
-        </p>
-        <p className="mt-5 px-2 py-2">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus
-          magnam cupiditate tempore rem unde sint nulla veritatis provident,
-          aliquam perferendis.
-        </p>
-
-        <p className="mt-8 italic border-l-8 px-2 py-2 border-[#A3B18A]">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-          quidem architecto beatae hic tenetur perferendis?
-        </p>
+                <p className="px-2 py-2 italic">{item.example || "None"}</p>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </>
   );
