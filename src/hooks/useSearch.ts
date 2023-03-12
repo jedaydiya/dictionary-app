@@ -16,7 +16,7 @@ const useSearch = () => {
     axios
       .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${term}`)
       .then((res) => {
-        // console.log(res.data[0]);
+        console.log(res.data[0]);
         setWord(res.data[0]);
       });
   };
